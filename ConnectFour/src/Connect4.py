@@ -71,13 +71,13 @@ if __name__ == "__main__":
     game_board = [["  -  " for i in range(board_columns)] for j in range(board_rows)]
 
 
-    place_in_order("X", 1, board_columns, game_board)
-    place_in_order("X", 5, board_columns, game_board)
-    place_in_order("X", 3, board_columns, game_board)
-    place_in_order("X", 4, board_columns, game_board)
-    print(game_board)
-    display(game_board)
-    check_rows(game_board)
+    # place_in_order("X", 1, board_columns, game_board)
+    # place_in_order("X", 5, board_columns, game_board)
+    # place_in_order("X", 3, board_columns, game_board)
+    # place_in_order("X", 4, board_columns, game_board)
+    # print(game_board)
+    # display(game_board)
+    # check_rows(game_board)
 
 
     # player1 = input_player_decision()
