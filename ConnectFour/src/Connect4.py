@@ -125,7 +125,12 @@ def check_columns(slot, board, columns):
         exit()
 
 
-# def check_game_status(board):
+def check_game_status(slot, board, rows, columns):
+    check_rows(slot, board, rows)  # Checking in rows
+    check_columns(slot, board, columns)  # Checking in columns
+    check_right_diagonal(slot, board, rows, columns)  # Checking in 1st diagonal
+    check_left_diagonal(slot, board, rows, columns)  # Checking in 2nd diagonal
+    
 
 def place_in_order(choice, coin_place, cols, board):
     """To place the coin(Choice) in the proper slot according to the rules
