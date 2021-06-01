@@ -32,7 +32,7 @@ def input_player_decision():
 
 
 def check_rows(board):
-    valid1 = "  O    O    O    O "
+    valid1 = "  O    O    O    O  "
     valid2 = "  X    X    X    X  "
     for row in board:
         list_row = ""
@@ -69,17 +69,17 @@ if __name__ == "__main__":
     board_columns = int(input("Enter no.of columns of the board : "))
     rows_cols_validation(board_rows, board_columns)  # Checking for Rows and Columns Validation
     game_board = [["  -  " for i in range(board_columns)] for j in range(board_rows)]
-    
-    
-    # place_in_order("X", 1, board_columns, game_board)
-    # place_in_order("X", 2, board_columns, game_board)
-    # place_in_order("X", 3, board_columns, game_board)
-    # place_in_order("X", 4, board_columns, game_board)
-    # print(game_board)
-    # display(game_board)
-    # check_rows(game_board)
-    
-    
+
+
+    place_in_order("X", 1, board_columns, game_board)
+    place_in_order("X", 5, board_columns, game_board)
+    place_in_order("X", 3, board_columns, game_board)
+    place_in_order("X", 4, board_columns, game_board)
+    print(game_board)
+    display(game_board)
+    check_rows(game_board)
+
+
     # player1 = input_player_decision()
     # player2 = None
     #
