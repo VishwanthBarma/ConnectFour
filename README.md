@@ -7,7 +7,7 @@
 
 DETAILS:
 
-        Have you ever played "Connect 4"? It's a popular kid's game by the Hasbro company. In this projrct,
+Have you ever played "Connect 4"? It's a popular kid's game by the Hasbro company. In this projrct,
 our task is to create a Connect 4 game in python. Before the game get started, for reference you can also watch a video to get more information ->  https://youtu.be?utXzIFEVPjA
 
 Once we got the rules down, our assignment should be fairly starightforward. We want to draw the board, and allow two players to take turns placing their pieces on the board (but as we learned above, they can onlu do so by choosing a column, not a row). The first player to get 4 acorss or diagonal should win!
