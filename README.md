@@ -1,7 +1,7 @@
 # ConnectFour(Python)
 ⛳️ Building a game called ConectFour.
 ⛳️ Using Python.
-⛳️ Beginner Level.
+⛳️ Intermediate Level.
 
 # A Simple Game
 
