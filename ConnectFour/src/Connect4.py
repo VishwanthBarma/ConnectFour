@@ -31,19 +31,98 @@ def input_player_decision():
         exit()
 
 
-def check_rows(board):
+def check_left_diagonal(slot, board, rows, columns):
+    """Checking the left diagonal in the board (\\)
+    slot -> Return list from the place_in_order function
+    board -> Main Board from the game
+    rows -> Rows in the game board
+    columns -> Columns in the game board
+    """
+    r1, r2 = slot[0], slot[0] - 1
+    c1, c2 = slot[1], slot[1] - 1
+    lower_string = ""
+    upper_string = ""
+    while r1 < columns and c1 < rows:
+        element = board[r1][c1]
+        lower_string += str(element) + ""
+        r1 += 1
+        c1 += 1
+    while r2 >= 0 and c2 >= 0:
+        element = board[r2][c2]
+        upper_string += str(element) + ""
+        r2 -= 1
+        c2 -= 1
+    upper_string = upper_string[::-1]
+    final_string = upper_string + lower_string
     valid1 = "  O    O    O    O  "
     valid2 = "  X    X    X    X  "
-    for row in board:
-        list_row = ""
-        for element in row:
-            list_row += str(element) + ""
-        print(list_row)
-        if list_row.find(valid1) != -1 or list_row.find(valid2) != -1:
-            print("YOU WON")
-            exit()
-        else:
-            continue
+    if final_string.find(valid1) != -1 or final_string.find(valid2) != -1:
+        print("YOU WON")
+        exit()
+
+
+def check_right_diagonal(slot, board, rows, columns):
+    """Checking the right diagonal in the board (//)
+    slot -> Return list from the place_in_order function
+    board -> Main Board from the game
+    rows -> Rows in the game board
+    columns -> Columns in the game board
+    """
+    r1, r2 = slot[0], slot[0] - 1
+    c1, c2 = slot[1], slot[1] + 1
+    lower_string = ""
+    upper_string = ""
+    while r1 < rows and c1 >= 0:
+        element = board[r1][c1]
+        lower_string += str(element) + ""
+        r1 += 1
+        c1 -= 1
+    while r2 >= 0 and c2 < columns:
+        element = board[r2][c2]
+        upper_string += str(element) + ""
+        r2 -= 1
+        c2 += 1
+    lower_string = lower_string[::-1]
+    final_string = lower_string + upper_string
+    valid1 = "  O    O    O    O  "
+    valid2 = "  X    X    X    X  "
+    if final_string.find(valid1) != -1 or final_string.find(valid2) != -1:
+        print("YOU WON")
+        exit()
+
+
+def check_rows(slot, board, rows):
+    """Checking for win, in case condition satisfies in a row
+    slot -> Returned value from function place_in_order [row, column]
+    board -> Main Board of the game
+    rows -> No of rows in the game board
+    """
+    valid1 = "  O    O    O    O  "
+    valid2 = "  X    X    X    X  "
+    string_row = ""
+    for i in range(len(rows)):
+        element = board[slot[0]][i]   # here slot[0] indicates the row value of the placed slot
+        string_row += str(element) + ""
+    if string_row.find(valid1) != -1 or string_row.find(valid2) != -1:
+        print("YOU WON")
+        exit()
+
+
+def check_columns(slot, board, columns):
+    """Checking for win, in case condition satisfies in a column
+    slot -> Returned value from function place_in_order [row, column]
+    board -> Main Board of the game
+    columns -> No of columns in the game board
+    """
+    valid1 = "  O    O    O    O  "
+    valid2 = "  X    X    X    X  "
+    string_column = ""
+    for i in range(len(columns)):
+        element = board[i][slot[1]]  # here slot[1] indicates the column value of the placed slot
+        string_column += str(element) + ""
+    if string_column.find(valid1) != -1 or string_column.find(valid2) != -1:
+        print("YOU WON")
+        exit()
 
 
 # def check_game_status(board):
@@ -54,12 +133,14 @@ def place_in_order(choice, coin_place, cols, board):
     coin_place -> place of the coin that is chosen by the user (player1/player2)
     columns -> reference for the no.of columns in the board
     board -> board of the game
+    <--Returns the Slot of Placed Coin [row, column]-->
     """
     ind = coin_place - 1
     for i in range(cols):
-        if board[(cols - 1) - i][ind] == "  -  ":
-            board[(cols - 1) - i][ind] = "  " + choice + "  "
-            return
+        a = (cols - 1) - i
+        if board[a][ind] == "  -  ":
+            board[a][ind] = "  " + choice + "  "
+            return [int(a), int(ind)]  # Returning the row and column number of the slot
         else:
             continue
 
@@ -69,7 +150,6 @@ if __name__ == "__main__":
     board_columns = int(input("Enter no.of columns of the board : "))
     rows_cols_validation(board_rows, board_columns)  # Checking for Rows and Columns Validation
     game_board = [["  -  " for i in range(board_columns)] for j in range(board_rows)]
-
 
     # place_in_order("X", 1, board_columns, game_board)
     # place_in_order("X", 5, board_columns, game_board)
