@@ -64,8 +64,11 @@ def check_left_diagonal(slot, board, rows, columns):
     valid1 = "  O    O    O    O  "
     valid2 = "  X    X    X    X  "
     if final_string.find(valid1) != -1 or final_string.find(valid2) != -1:
-        print("YOU WON")
-        exit()
+        return 1
+    else:
+        return 0
+        # print("YOU WON")
+        # exit()
 
 
 def check_right_diagonal(slot, board, rows, columns):
@@ -94,8 +97,11 @@ def check_right_diagonal(slot, board, rows, columns):
     valid1 = "  O    O    O    O  "
     valid2 = "  X    X    X    X  "
     if final_string.find(valid1) != -1 or final_string.find(valid2) != -1:
-        print("YOU WON")
-        exit()
+        return 1
+    else:
+        return 0
+        # print("YOU WON")
+        # exit()
 
 
 def check_rows(slot, board, rows):
@@ -111,8 +117,11 @@ def check_rows(slot, board, rows):
         element = board[slot[0]][i]   # here slot[0] indicates the row value of the placed slot
         string_row += str(element) + ""
     if string_row.find(valid1) != -1 or string_row.find(valid2) != -1:
-        print("YOU WON")
-        exit()
+        return 1
+    else:
+        return 0
+        # print("YOU WON")
+        # exit()
 
 
 def check_columns(slot, board, columns):
@@ -128,15 +137,22 @@ def check_columns(slot, board, columns):
         element = board[i][slot[1]]  # here slot[1] indicates the column value of the placed slot
         string_column += str(element) + ""
     if string_column.find(valid1) != -1 or string_column.find(valid2) != -1:
-        print("YOU WON")
-        exit()
+        return 1
+    else:
+        return 0
+        # print("YOU WON")
+        # exit()
 
 
 def check_game_status(slot, board, rows, columns):
-    check_rows(slot, board, rows)  # Checking in rows
-    check_columns(slot, board, columns)  # Checking in columns
-    check_right_diagonal(slot, board, rows, columns)  # Checking in 1st diagonal
-    check_left_diagonal(slot, board, rows, columns)  # Checking in 2nd diagonal
+    c1 = check_rows(slot, board, rows)  # Checking in rows
+    c2 = check_columns(slot, board, columns)  # Checking in columns
+    c3 = check_right_diagonal(slot, board, rows, columns)  # Checking in 1st diagonal
+    c4 = check_left_diagonal(slot, board, rows, columns)  # Checking in 2nd diagonal
+    if c1 == 1 or c2 == 1 or c3 == 1 or c4 == 1:
+        return 1
+    else:
+        return 0
 
 
 def place_in_order(choice, coin_place, cols, board):
@@ -193,7 +209,10 @@ if __name__ == "__main__":
         display(game_board, board_columns)
 
         # Checking for game status
-        check_game_status(coin_slot, game_board, board_rows, board_columns)
+        result = check_game_status(coin_slot, game_board, board_rows, board_columns)
+        if result == 1:
+            print(turn1_name, " Won The Game")
+            exit()
 
         # Changing turns of te player in the output screen
         if turn1 == turn[0]:
