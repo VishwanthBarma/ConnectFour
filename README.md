@@ -3,7 +3,7 @@
 ⛳️ Using Python.
 ⛳️ Intermediate Level.
 
-->📌 Note- In this game, the user should input number of rows and columns(within the mentioned range) instead of fixed rows/columns. 
+->📌 Note- In this game, the user should input number of rows and columns(within the mentioned range) instead of fixed rows/columns like other COnnectFour games.
 
 # A Simple Game
 
