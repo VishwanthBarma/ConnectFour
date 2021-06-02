@@ -67,8 +67,6 @@ def check_left_diagonal(slot, board, rows, columns):
         return 1
     else:
         return 0
-        # print("YOU WON")
-        # exit()
 
 
 def check_right_diagonal(slot, board, rows, columns):
@@ -100,8 +98,6 @@ def check_right_diagonal(slot, board, rows, columns):
         return 1
     else:
         return 0
-        # print("YOU WON")
-        # exit()
 
 
 def check_rows(slot, board, rows):
@@ -120,8 +116,6 @@ def check_rows(slot, board, rows):
         return 1
     else:
         return 0
-        # print("YOU WON")
-        # exit()
 
 
 def check_columns(slot, board, columns):
@@ -140,8 +134,6 @@ def check_columns(slot, board, columns):
         return 1
     else:
         return 0
-        # print("YOU WON")
-        # exit()
 
 
 def check_game_status(slot, board, rows, columns):
