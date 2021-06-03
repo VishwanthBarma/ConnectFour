@@ -49,7 +49,7 @@ def check_left_diagonal(slot, board, rows, columns):
     c1, c2 = slot[1], slot[1] - 1
     lower_string = ""
     upper_string = ""
-    while r1 < columns and c1 < rows:
+    while r1 < rows and c1 < columns:
         element = board[r1][c1]
         lower_string += str(element) + ""
         r1 += 1
