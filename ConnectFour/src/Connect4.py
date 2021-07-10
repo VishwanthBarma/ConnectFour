@@ -100,7 +100,7 @@ def check_right_diagonal(slot, board, rows, columns):
         return 0
 
 
-def check_rows(slot, board, rows):
+def check_rows(slot, board, columns):
     """Checking for win, in case condition satisfies in a row
     slot -> Returned value from function place_in_order [row, column]
     board -> Main Board of the game
@@ -109,7 +109,7 @@ def check_rows(slot, board, rows):
     valid1 = "  O    O    O    O  "
     valid2 = "  X    X    X    X  "
     string_row = ""
-    for i in range(rows):
+    for i in range(columns):
         element = board[slot[0]][i]   # here slot[0] indicates the row value of the placed slot
         string_row += str(element) + ""
     if string_row.find(valid1) != -1 or string_row.find(valid2) != -1:
@@ -118,7 +118,7 @@ def check_rows(slot, board, rows):
         return 0
 
 
-def check_columns(slot, board, columns):
+def check_columns(slot, board, rows):
     """Checking for win, in case condition satisfies in a column
     slot -> Returned value from function place_in_order [row, column]
     board -> Main Board of the game
@@ -127,7 +127,7 @@ def check_columns(slot, board, columns):
     valid1 = "  O    O    O    O  "
     valid2 = "  X    X    X    X  "
     string_column = ""
-    for i in range(columns):
+    for i in range(rows):
         element = board[i][slot[1]]  # here slot[1] indicates the column value of the placed slot
         string_column += str(element) + ""
     if string_column.find(valid1) != -1 or string_column.find(valid2) != -1:
@@ -137,8 +137,8 @@ def check_columns(slot, board, columns):
 
 
 def check_game_status(slot, board, rows, columns):
-    c1 = check_rows(slot, board, rows)  # Checking in rows
-    c2 = check_columns(slot, board, columns)  # Checking in columns
+    c1 = check_rows(slot, board, columns)  # Checking in rows
+    c2 = check_columns(slot, board, rows)  # Checking in columns
     c3 = check_right_diagonal(slot, board, rows, columns)  # Checking in 1st diagonal
     c4 = check_left_diagonal(slot, board, rows, columns)  # Checking in 2nd diagonal
     if c1 == 1 or c2 == 1 or c3 == 1 or c4 == 1:
@@ -147,7 +147,7 @@ def check_game_status(slot, board, rows, columns):
         return 0
 
 
-def place_in_order(choice, coin_place, cols, board):
+def place_in_order(choice, coin_place, rows, board):
     """To place the coin(Choice) in the proper slot according to the rules
     choice -> O/X placing that coin int the board
     coin_place -> place of the coin that is chosen by the user (player1/player2)
@@ -156,8 +156,8 @@ def place_in_order(choice, coin_place, cols, board):
     <--Returns the Slot of Placed Coin [row, column]-->
     """
     ind = coin_place - 1
-    for i in range(cols):
-        a = (cols - 1) - i
+    for i in range(rows):
+        a = (rows - 1) - i
         if board[a][ind] == "  -  ":
             board[a][ind] = "  " + str(choice) + "  "
             return [int(a), int(ind)]  # Returning the row and column number of the slot
@@ -168,6 +168,8 @@ def place_in_order(choice, coin_place, cols, board):
 if __name__ == "__main__":
     board_rows = int(input("Enter no.of rows of board between (4-10) inclusively : "))
     board_columns = int(input("Enter no.of columns of the board between (4-10) inclusively : "))
+    # board_rows = board_columns
+
     rows_cols_validation(board_rows, board_columns)  # Checking for Rows and Columns Validation
     game_board = [["  -  " for i in range(board_columns)] for j in range(board_rows)]
     # player1, player2 = None, None
@@ -184,18 +186,19 @@ if __name__ == "__main__":
     turn1_name = "Player-1"
     while play_game:
         print("Enter 'q' for quit the game")
-        choice_of_player = int(input("Enter the column number to drop your choice ({}): ".format(turn1_name)))
+        choice_of_player = input("Enter the column number to drop your choice ({}): ".format(turn1_name))
 
         # Quiting the code if the player enters 'q' in selecting the columns
         if choice_of_player == "q" or choice_of_player == "Q":
             exit()
 
+        choice_of_player = int(choice_of_player)
         # Checking for invalid column selection by the user
         if choice_of_player < 1 or choice_of_player > board_columns:
             print("Input is out of range- Invalid Input")
             continue
         #  Placing the coin in the board
-        coin_slot = place_in_order(turn1, choice_of_player, board_columns, game_board)
+        coin_slot = place_in_order(turn1, choice_of_player, board_rows, game_board)
 
         # Displaying the Game Board
         display(game_board, board_columns)
